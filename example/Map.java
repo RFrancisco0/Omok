@@ -1,5 +1,7 @@
 package noapplet.example;
 
+import java.awt.*;
+
 public class Map{
     short[][] map;
     final short BLACK=1;
@@ -56,7 +58,6 @@ public class Map{
             if(map[y][x]!=map[i][x])
                 return false;
         }
-
         return true;
     }
     //down

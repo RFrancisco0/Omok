@@ -2,7 +2,7 @@ package noapplet.example;
 
 import java.awt.*;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /** A class used to create and design a game board by drawing it.
  *
@@ -13,10 +13,15 @@ import javax.swing.JPanel;
 
 
 @SuppressWarnings("serial")
-public class DrawBoard extends JPanel{
+public class DrawBoard extends JPanel {
     MapSize size;
     Map map;
     final int STONE_SIZE=26;
+
+    int counter;
+
+    String temp;
+
 
     /**
      * Method used to draw the board game and, also it is a constructor
@@ -30,6 +35,8 @@ public class DrawBoard extends JPanel{
         System.out.println("board");
         this.map=map;
 
+
+
     }
 
     /**
@@ -41,10 +48,17 @@ public class DrawBoard extends JPanel{
         super.paintComponent(g);
         g.setColor(new Color(150,20,200));
         g.setFont(new Font("San-serif", Font.BOLD, 30));
-        g.drawString("FRANCISCO RODRIGUEZ", 100, 600);
+        g.drawString("FRANCISCO RODRIGUEZ--Irvin Arredondo", 20, 600);
+        g.setColor(new Color(150,20,200));
+        g.drawString(turn(), 20, 630);
+
         board(g);
         drawStone(g);
+
+
     }
+
+
 
     /**
      * Method used to draw the line intersections in the board
@@ -64,10 +78,14 @@ public class DrawBoard extends JPanel{
     public void drawStone(Graphics g) {
         for(int y=0;y<size.SIZE;y++){
             for(int x=0;x<size.SIZE;x++){
-                if(map.getXY(y, x)==map.getBlack())
-                    drawBlack(g,x,y);
-                else if(map.getXY(y, x)==map.getWhite())
-                    drawWhite(g, x, y);
+                if(map.getXY(y, x)==map.getBlack()){
+                    //counter ++;
+                    //temp="Black turn";
+                    drawBlack(g,x,y); }
+                else if(map.getXY(y, x)==map.getWhite()){
+                    //counter --;
+                    //temp="White turn";
+                    drawWhite(g, x, y);}
             }
         }
     }
@@ -81,7 +99,6 @@ public class DrawBoard extends JPanel{
     public void drawBlack(Graphics g,int x,int y){
         g.setColor(Color.GRAY);
         g.fillOval((x+1)*size.getCell()-15, (y)*size.getCell()+15, STONE_SIZE, STONE_SIZE);
-
     }
     /**
      * Method used to draw the actual stone with color white
@@ -94,5 +111,17 @@ public class DrawBoard extends JPanel{
         g.fillOval(x*size.getCell()+15, y*size.getCell()+15, STONE_SIZE, STONE_SIZE);
 
     }
+
+    //method use for comparing the possible player turn
+    public String turn(){
+        if(counter==1){
+            return temp="Black turn";
+        }
+        if(counter==0){
+            return temp="White turn";
+        }
+        return null;
+    }
+
 
 }
